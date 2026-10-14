@@ -19,13 +19,17 @@ The sources below grounded the design and technical approach. Design choices are
 
 Research into cognitive load, flow, telemetry-assisted balancing and multi-week progression should continue during playtesting. This initial research pass does not exhaust the master brief’s research agenda.
 
-## Art and animation direction (release 1.2)
+## Art and animation direction (release 1.3)
 
-The latest user references supersede the prior smooth 2.5D direction. The game now uses detailed warm pixel scenery, textured amber wood furniture and coherent compact chibi characters. Original assets: `assets/shop-environment.png`, `assets/fixture-atlas.png` (nine cells), and `assets/character-atlas.png` (sixteen complete poses). Commercial reference art is not included. See [UI_RESEARCH.md](UI_RESEARCH.md).
+The latest reference adds a mall setting. The game uses an original Jewel-inspired panorama with a glass roof, tropical indoor gardens, waterfall, glass walkways, escalator and lift. A separately generated transparent Challenger store shell sits on the promenade. This is a fictional game layout, not a measured reproduction of an actual Jewel unit. No user reference image is redistributed.
 
-The renderer uses a 32-unit navigation tile, nearest-neighbour scaling and alpha-trimmed full sprites aligned by their feet. Characters select directional walk, browse and service frames. Side poses also alternate a one-pixel step; front/back walks cycle full-body frames. Reduced motion holds a stable pose and removes weather streaks. Cash and delivery feedback remain readable.
+Assets are `assets/mall-panorama.png`, `assets/mall-shop.png`, `assets/fixture-atlas.png` and `assets/character-atlas.png`. The prior shophouse image and repeated pavement are removed. The mall fills the viewport; the playable store moves with the camera. The floor has a 0.33 vertical depth projection. Characters and display artwork retain upright proportions. All input, placement outlines and camera operations use the same projection.
 
-The interface keeps resource counters and one milestone ticket over the scene. A compact wood action tray opens illustrated fitting, staffing, stock and research windows. Closing a window restores the unobstructed world. Day-end reports appear at closing or on request.
+Customer states now include approach. A route starts beyond the current visible corridor, travels to the door and continues into the store. After a purchase or abandoned visit, the same customer walks through the door, along the promenade and beyond the frame before being removed. Extending the camera view also extends a departing customer's exit waypoint. Passing shoppers are ambient only; they never create sales or affect inventory.
+
+Waterfall streaks animate behind glass walkways. Reduced motion stops decorative waterfall and pose animation. The mall remains indoors during rain; weather still affects game demand but no rain falls on the shop floor.
+
+The interface keeps resource counters and a milestone ticket over the scene. A wood action tray opens illustrated stock, staffing and research windows. See [UI_RESEARCH.md](UI_RESEARCH.md).
 
 ## Audio bible
 

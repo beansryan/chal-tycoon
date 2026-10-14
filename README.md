@@ -1,12 +1,14 @@
 # Challenger Store Tycoon
 
-A playable, animated, offline-first PWA of a Singapore electronics shop. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
+A playable, animated, offline-first PWA of a Singapore electronics shop in a Jewel-inspired mall. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
 
-## Release 1.2: detailed pixel art and a game HUD
+## Release 1.3: Jewel mall and continuous customer routes
 
-Original warm pixel artwork now covers the shop environment, nine furniture types and complete animated characters. Directional walking, browsing and cashier poses use full-body frames with aligned feet. A compact resource HUD and wood-framed action tray leave the world visible; illustrated build menus and stock/staff/research windows open on demand. See [UI research](docs/UI_RESEARCH.md) for the actual game references reviewed.
+The store now opens onto an indoor mall promenade, backed by an original Jewel-inspired glass dome, tropical garden and animated waterfall. A transparent store shell replaces the outdoor shophouse scene and repeated pavement. The playable floor uses a shallow depth projection while whole character sprites stay upright.
 
-37 code checks and 28 headless Chromium browser checks pass, including gameplay actions, ten viewport sizes, save reload, fold layouts, offline launch under a repository subpath and explicit service-worker updates. Physical-device playtesting remains outstanding.
+Customers start beyond the visible corridor, approach the doorway, browse and pay, then walk back through the corridor and out of frame. Passing mall shoppers add movement without affecting store sales. Existing saves, inventory and layout remain compatible.
+
+40 code checks and 29 headless Chromium browser checks pass, including continuous arrivals/departures, corridor save restoration, gameplay actions, ten viewport sizes, offline artwork under a repository subpath and service-worker updates. Physical-device playtesting remains outstanding.
 
 ## Put it on GitHub Pages
 
@@ -47,8 +49,8 @@ Phones are portrait-first. Tablets and unfolded screens support both orientation
 
 ## What is included
 
-- Original detailed pixel shop environment, furniture and character atlases, created for this game.
-- Directional walk cycles, browsing/reaching, cashier service and delivery feedback.
+- Original detailed pixel mall panorama, transparent store shell, furniture and character atlases, created for this game.
+- Directional walk cycles, continuous corridor arrivals/departures, passing mall shoppers, browsing/reaching, cashier service, waterfall movement and delivery feedback.
 - Two checkouts with distinct queue slots and route/wait-aware lane choices.
 - Standard discounted deliveries, express deliveries and capacity reservations.
 - Four research projects, earned research points, and Aisha’s configurable reorder policy.
@@ -137,7 +139,7 @@ Upload the changed source and increment `VERSION` in `sw.js` for each published 
 
 ## Architecture and design
 
-`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns the pixel world and camera; `art.js` loads and trims the three original atlases; `characters.js` selects whole-body animation frames; `checkouts.js` routes queues; `operations.js` handles suppliers and research; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
+`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns the pixel world and camera; `art.js` loads the mall and shop images and trims the furniture/character atlases; `characters.js` selects whole-body animation frames; `checkouts.js` routes queues; `operations.js` handles suppliers and research; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
 
 The game runs fixed 50ms simulation steps separately from rendering. NPCs recalculate paths after layout changes, not every frame. Saves happen on actions, periodic checkpoints and lifecycle changes.
 

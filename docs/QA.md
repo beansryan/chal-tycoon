@@ -1,13 +1,14 @@
 # Validation and playtest checklist
 
-## Release 1.2 validation
+## Release 1.3 validation
 
-37 Node checks pass: economy and persistence, routes and stock reservations, second checkout, supplier deliveries, research and automation, version-one save migration, whole-body animation directions, reduced motion, contextual controls and offline asset coverage.
+40 Node checks pass: economy and persistence, routes and stock reservations, second checkout, supplier deliveries, research and automation, version-one save migration, whole-body animation directions, reduced motion, contextual controls and offline asset coverage, continuous customer approach/departure and restoration of shoppers outside the store.
 
-28 headless Chromium checks pass:
+29 headless Chromium checks pass:
 
 - First sale, restock, upgrades, build confirmation, staff hire and online order through the UI.
 - Panning does not select or move a fixture; saves survive reload.
+- Customers approach from beyond the visible frame, cross the doorway continuously and remain visible in the corridor until leaving the frame.
 - Second checkout, supplier order/arrival and research controls.
 - Ten viewport sizes: 320×568, 390×844, 430×932, 768×1024, 820×1180, 1024×1366, 1024×768, 1366×1024, 844×390 and 700×600.
 - Book and tabletop hinge layouts keep world and management panes separate.
