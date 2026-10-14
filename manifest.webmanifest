@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Challenger Store Tycoon",
   "short_name": "Store Tycoon",
-  "description": "A little Singapore shop. A very big dream. An offline pixel-art retail management game.",
+  "description": "An animated, illustrated Singapore electronics shop management game with offline play.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

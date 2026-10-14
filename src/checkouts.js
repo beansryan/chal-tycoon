@@ -1,0 +1,10 @@
+export class CheckoutManager {
+ constructor(engine){this.e=engine;this.clocks=new Map()}
+ get lanes(){return [{id:'checkout',...this.e.till},...(this.e.s.secondCheckout?[{id:'checkout-2',x:4,y:10}]:[])]}
+ duration(id){const jamie=this.e.s.staff.find(a=>a.id==='jamie');const staffed=jamie&&(this.e.s.secondCheckout?id==='checkout-2':id==='checkout');return (staffed?(jamie.training==='speed'?1.7:2.4):5)*(this.e.ops.has('pos')?.75:1)}
+ customers(id){return this.e.s.customers.filter(c=>['toQueue','queue'].includes(c.state)&&(c.lane||'checkout')===id)}
+ slots(lane){const x=lane.x;return lane.id==='checkout'?[{x,y:11},{x:x+1,y:11},{x:x+2,y:11},{x:x+2,y:12},{x:x+1,y:12},{x,y:12},{x:x-1,y:12},{x:x-2,y:12},{x:x-2,y:11},{x:x-1,y:11}]:[{x,y:11},{x:x-1,y:11},{x:x-2,y:11},{x:x-2,y:12},{x:x-1,y:12},{x,y:12},{x:x+1,y:12},{x:x+2,y:12},{x:x+2,y:11},{x:x+1,y:11}]}
+ assign(c){const candidates=this.lanes.map(lane=>{const count=this.customers(lane.id).length;const target=this.slots(lane)[count];const path=target?this.e.path(c,target):null;return {lane,path,count,score:count*this.duration(lane.id)+(path?.length||0)/2.1}}).filter(a=>a.path);candidates.sort((a,b)=>a.score-b.score);const best=candidates[0];if(!best)return false;c.lane=best.lane.id;c.state='toQueue';c.path=best.path;c.bubble='!';return true}
+ rebalance(){for(const lane of this.lanes){const slots=this.slots(lane);for(const [i,c] of this.customers(lane.id).entries()){const target=slots[i];if(!target){this.e.leave(c,'queue');continue}const last=c.queueTarget;if(!last||last.x!==target.x||last.y!==target.y){c.queueTarget={...target};c.path=this.e.path(c,target)||[];c.state='toQueue'}}}}
+ tick(dt){this.rebalance();for(const lane of this.lanes){const first=this.customers(lane.id)[0];if(!first||first.state!=='queue'){this.clocks.set(lane.id,0);continue}const clock=(this.clocks.get(lane.id)||0)+dt;if(clock>=this.duration(lane.id)){this.clocks.set(lane.id,0);const f=this.e.s.fixtures.find(a=>a.id===first.fixture);if(f?.stock>0)this.e.sale(first,f);else this.e.leave(first,'stock');this.rebalance()}else this.clocks.set(lane.id,clock)}}
+}

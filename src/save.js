@@ -1,8 +1,8 @@
-import {CONFIG, PRODUCTS, STAFF} from './config.js';
+import {CONFIG, PRODUCTS, STAFF, RESEARCH, capacity} from './config.js';
 import {Engine,freshState} from './engine.js';
 const finite=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
 export function validateSave(raw){
- if(!raw||typeof raw!=='object'||raw.version!==1)throw Error('This save version is not supported.');
+ if(!raw||typeof raw!=='object'||![1,2].includes(raw.version))throw Error('This save version is not supported.');
  for(const key of ['cash','xp','reputation','time','totalTime','day','expansion','loan','rng'])if(!finite(raw[key],0,key==='expansion'?3:1e12))throw Error('Invalid save: '+key);
  if(!Number.isInteger(raw.day)||raw.day<1||!Number.isInteger(raw.expansion)||raw.time>=CONFIG.dayLength)throw Error('Invalid trading day.');
  if(!Array.isArray(raw.fixtures)||!raw.fixtures.length||raw.fixtures.length>10)throw Error('Invalid shop layout.');
@@ -17,6 +17,17 @@ export function validateSave(raw){
  for(const key of ['music','sfx','haptics','reducedMotion','highContrast','largeText'])if(typeof raw.settings?.[key]==='boolean')state.settings[key]=raw.settings[key];state.settings.quality=['auto','low','high'].includes(raw.settings?.quality)?raw.settings.quality:'auto';
  if(Array.isArray(raw.orders))state.orders=raw.orders.filter(o=>o&&PRODUCTS[o.type]&&typeof o.id==='string'&&/^order-[\d.]+$/.test(o.id)&&finite(o.remaining,0,80)).slice(0,3).map(o=>({...o}));
  if(Array.isArray(raw.customers))state.customers=raw.customers.filter(c=>c&&finite(c.kind,0,5)&&Number.isInteger(c.kind)&&finite(c.x,0,30)&&finite(c.y,0,15)&&finite(c.id,0,1e15)&&ids.has(c.fixture)&&['walk','browse','toQueue','queue','leave'].includes(c.state)&&finite(c.timer,0,20)&&finite(c.wait,0,300)&&finite(c.patience,1,200)&&Array.isArray(c.path)&&c.path.length<200&&c.path.every(p=>finite(p.x,0,30)&&finite(p.y,0,15))).slice(0,24).map(c=>({...c,skin:Number.isInteger(c.skin)&&c.skin>=0&&c.skin<4?c.skin:0,hair:Number.isInteger(c.hair)&&c.hair>=0&&c.hair<3?c.hair:0,bubble:typeof c.bubble==='string'?c.bubble.slice(0,60):null}));
+ if(raw.version===2){
+  if(!finite(raw.researchPoints,0,1e9)||!Number.isInteger(raw.researchPoints)||typeof raw.secondCheckout!=='boolean'||!Array.isArray(raw.researched)||!raw.researched.every(id=>RESEARCH.some(r=>r.id===id))||new Set(raw.researched).size!==raw.researched.length)throw Error('Invalid operations data.');
+  state.researchPoints=raw.researchPoints;state.researched=[...raw.researched];state.secondCheckout=raw.secondCheckout;
+  state.reorderPolicy=raw.reorderPolicy==='supplier'?'supplier':'instant';state.reorderThreshold=[1,3,5].includes(raw.reorderThreshold)?raw.reorderThreshold:1;
+  if(!Array.isArray(raw.deliveries)||raw.deliveries.length>10)throw Error('Invalid deliveries.');
+  const deliveryIds=new Set(),deliveryFixtures=new Set();
+  state.deliveries=raw.deliveries.map(d=>{if(!d||typeof d.id!=='string'||!/^delivery-[\d-]+$/.test(d.id)||deliveryIds.has(d.id)||deliveryFixtures.has(d.fixture)||!ids.has(d.fixture)||!finite(d.quantity,1,24)||!Number.isInteger(d.quantity)||!finite(d.remaining,0,120)||!finite(d.cost,1,1e6)||!['standard','express'].includes(d.mode))throw Error('Invalid delivery.');deliveryIds.add(d.id);deliveryFixtures.add(d.fixture);return {id:d.id,fixture:d.fixture,quantity:d.quantity,remaining:d.remaining,cost:d.cost,mode:d.mode}});
+  if(state.secondCheckout&&!state.staff.some(a=>a.id==='jamie'))throw Error('Second checkout needs its cashier.');
+  for(const f of state.fixtures)if(f.stock+state.deliveries.filter(d=>d.fixture===f.id).reduce((sum,d)=>sum+d.quantity,0)>capacity(f))throw Error('Stock and reserved delivery exceed capacity.');
+ }
+ for(const c of state.customers){c.lane=state.secondCheckout&&c.lane==='checkout-2'?'checkout-2':'checkout';c.queueTarget=null}
  const check=new Engine(state);for(const f of state.fixtures)if(!check.validPlacement(f.x,f.y,f.id))throw Error('Invalid or blocked shop layout.');
  return state;
 }

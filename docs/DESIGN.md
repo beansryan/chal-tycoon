@@ -19,19 +19,17 @@ The sources below grounded the design and technical approach. Design choices are
 
 Research into cognitive load, flow, telemetry-assisted balancing and multi-week progression should continue during playtesting. This initial research pass does not exhaust the master brief’s research agenda.
 
-## Art bible
+## Art and animation direction (updated)
 
-- Original 3/4 top-down tile world; 24×24 logical tiles.
-- Characters have a roughly 12×28 pixel visual silhouette and a tile-based navigation footprint.
-- Dark teal outlines, warm cream floors, jade greenery, muted department accents and gold feedback.
-- Light comes from above-left. Furniture has a short dark outline and lower-right grounding shadow.
-- Displays occupy two tiles across; their stock and department label remain visible.
-- Character heads, distinct shirt colours, skin tones, glasses and bags provide readable silhouettes without ethnic caricature.
-- HDB façades, block signs, covered frontage and mall-like tiles carry the setting. They are original illustrative motifs, not geographic replicas.
-- A low-resolution offscreen canvas is drawn to the visible canvas with smoothing disabled. DOM panels use readable system text instead of ROM fonts.
-- Pointer targets are expanded beyond the small sprite. Direct sprite inspection also has a labelled DOM equivalent.
+The user superseded the original GBA/pixel-art requirement with **contemporary cozy illustrated 2.5D**. Game-design research about agency, daily rhythm and touch remains relevant; the prior handheld references no longer define the artwork.
 
-All game art is authored procedurally in `renderer.js` and the local icon generator. There are no image downloads, stock sprite packs, ripped ROM assets or generated illustrations pasted into the game. A production art pass can replace the procedural drawing routines with consistent original sprite sheets while keeping navigation footprints stable.
+The world uses smooth high-DPI Canvas rendering, a warm cutaway shop, soft shadows, maple-and-cream fixtures, coral signage, tropical plants and HDB surroundings. `assets/shop-atlas.png` is an original generated asset atlas made specifically for this game, with no third-party sprite packs. The renderer selects known crop rectangles from the atlas at runtime. Iconography and the SVG install icon are hand-authored locally.
+
+Characters use a procedural rig with independent legs, arms, torso and head. Front-facing head illustrations come from the original atlas; back/side treatment and pose articulation come from the rig. There are walking strides, subtle idle motion, browsing/reaching and cashier scan poses. The current rig is lightweight 2D articulation inside a 2.5D environment, not a full skeletal 3D character system or a bespoke frame-by-frame animation set. The avatar variants and motion can be refined further with player feedback.
+
+Deliveries trigger a stock van arriving at the frontage and upgrades trigger a restrained display bounce. Reduced motion removes decorative articulation, weather streaks, arrival movement and bounce while retaining stock changes, text and selection. Rendering quality never changes the economy.
+
+The underlying navigation grid remains integer tile-based. The renderer now maps a tile to 72 world units; camera pan/zoom and touch placement use that renderer tile size. Art smoothing is enabled; pixel filtering and hard retro menu ornament were removed.
 
 ## Audio bible
 
@@ -51,14 +49,14 @@ The level curve is `1 + floor(sqrt(XP / 60))`, capped at 50. Level jumps in debu
 
 Inventory interacts with cash, promotions, online orders and department adjacency. Staff interact with queues, cash/wages, browsing, offline work and development. Weather interacts with traffic and orders. Layout affects routes and bundle eligibility. Daily reports identify stock/queue losses. Milestones offer direction without marketing chores.
 
-Crowd characters can visually overlap; this version does not have individual crowd collision, a second checkout, multiple service zones or an advanced congestion model. The pacing director is a lightweight traffic rhythm and recovery adjustment, not the complete dramatic event director described in the source brief.
+Queue customers now have distinct reserved positions and two independently served lanes. Other browsing/moving customers can still visually overlap; this version does not have general crowd collision, multiple service zones or an advanced congestion model. The pacing director is a lightweight traffic rhythm and recovery adjustment, not the complete dramatic event director described in the source brief.
 
 ## Next releases
 
 1. Observe new players for 15 minutes, without coaching. Tune the first stock gap and strategic fork.
 2. Test returning staffed/unattended shops and daily report clarity.
-3. Add a second checkout and stronger visible queue layout before richer crowd congestion.
-4. Add research/automation choices, actual delivery times and customer-specific recommendation requests.
+3. Playtest the implemented second checkout and visible queue layout before adding general crowd congestion.
+4. Playtest the implemented research/automation and delivery tradeoffs, then expand customer-specific recommendations.
 5. Add repairs and supplier strategy only once their interactions improve the core loop.
 6. Build varied locations, long-term prestige and a multi-store network with distinct operating conditions.
 7. Expand original art, seasonal Singapore content, recurring staff/customer stories and the soundtrack.
@@ -66,3 +64,9 @@ Crowd characters can visually overlap; this version does not have individual cro
 9. Consider real rewards only after the standalone game earns return desire; reward authority remains on the backend.
 
 No real-world reward is necessary to play. No task requires sharing, browsing the real store, purchasing products or opening a campaign.
+
+## Supplier and research decisions
+
+Shipment cost is charged when ordered, and pending quantities reserve capacity. Standard deliveries discount per-unit cost by 12% (rounded); express costs 15% more (rounded). Research changes service time, attachment probability, reorder automation or standard ETA. Existing shipments are not retrospectively repriced or sped up. Both live and offline trading use the same operations logic.
+
+Two tills add throughput but increase stock pressure. They do not add free revenue or ignore inventory. Jamie moves to the second till, while the owner covers the original; there is no second wage charge. The visible queue system is bounded to ten positions per lane. If all positions are full, the shopper leaves with an understandable queue loss.

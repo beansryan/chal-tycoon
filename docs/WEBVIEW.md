@@ -32,7 +32,7 @@ These calls are idempotent. Browser visibility/page lifecycle handlers also save
 ## Outbound messages
 
 ```json
-{"type":"GAME_READY","version":1}
+{"type":"GAME_READY","version":2}
 {"type":"GAME_HAPTIC","style":"light"}
 ```
 
@@ -49,4 +49,4 @@ Do not confuse these extension points with implemented integrations. Any future 
 
 ## Persistence
 
-The game currently uses WebView/browser localStorage. The host should avoid clearing origin storage unexpectedly. Native/cloud backup, migrations, authentication and conflicts need a separate production implementation.
+The game currently uses WebView/browser localStorage. Schema 1 saves migrate to schema 2, retaining the existing storage key. The host should avoid clearing origin storage unexpectedly. Native/cloud backup, migrations, authentication and conflicts need a separate production implementation.

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs><linearGradient id="wall" x2="0" y2="1"><stop stop-color="#f7e2ba"/><stop offset="1" stop-color="#dcb991"/></linearGradient><linearGradient id="glass" x2="1" y2="1"><stop stop-color="#b3d6d1"/><stop offset="1" stop-color="#729798"/></linearGradient></defs>
+<rect width="512" height="512" rx="110" fill="#dce6d0"/>
+<ellipse cx="259" cy="395" rx="167" ry="25" fill="#87957b" opacity=".2"/>
+<path d="M123 190h266v200H123z" fill="url(#wall)"/>
+<path d="M389 190l24 15v181l-24 4z" fill="#ba987b"/>
+<rect x="133" y="185" width="246" height="23" rx="6" fill="#bc7957"/>
+<path d="M100 177l31-60h247l30 60z" fill="#c96c55"/>
+<path d="M115 176h278v24c-14 15-27 15-41 0-14 15-26 15-40 0-14 15-26 15-40 0-14 15-26 15-40 0-14 15-26 15-40 0-14 15-26 15-40 0-14 15-23 15-37 0z" fill="#eed9b0"/>
+<path d="M161 121l-13 53m63-53-5 53m56-53 4 53m57-53 13 53" stroke="#efba8f" stroke-width="16"/>
+<rect x="150" y="233" width="111" height="117" rx="9" fill="#b18a69"/>
+<rect x="157" y="240" width="97" height="102" rx="7" fill="url(#glass)"/>
+<path d="M177 245v94m-15-36h87" stroke="#d3e4d5" stroke-width="5"/>
+<rect x="285" y="232" width="79" height="158" rx="8" fill="#b18a69"/>
+<rect x="292" y="239" width="65" height="151" rx="5" fill="url(#glass)"/>
+<rect x="344" y="306" width="5" height="23" rx="2" fill="#f7dfb0"/>
+<rect x="139" y="375" width="231" height="19" rx="5" fill="#caaf89"/>
+<path d="M104 352h34l-5 37h-24z" fill="#bf8660"/>
+<ellipse cx="121" cy="341" rx="19" ry="21" fill="#679372"/>
+<ellipse cx="109" cy="331" rx="11" ry="18" fill="#8eb57a" transform="rotate(-22 109 331)"/>
+<ellipse cx="132" cy="327" rx="10" ry="16" fill="#497e62" transform="rotate(24 132 327)"/>
+</svg>

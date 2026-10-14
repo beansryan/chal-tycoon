@@ -1,6 +1,12 @@
 # Validation and playtest checklist
 
-## Automated checks completed for this package
+## Release 1.1 validation
+
+39 code tests passed: 16 original simulation/persistence checks, 14 operations/migration checks, four character-pose tests, and five presentation/cache tests. The full shop scene was rendered independently at wide and phone viewport sizes and inspected. These checks validate renderer commands and assets, but do not replace a browser run.
+
+The browser-testing connection became unavailable while building 1.1. The redesigned DOM/CSS, actual animation timing, install/update flow and fold layouts must be rechecked in a browser. The included browser suite is updated for the illustrated renderer. The successful checks below refer to release 1.0 and must not be interpreted as successful 1.1 browser validation.
+
+## Original release validation (historical)
 
 16 Node simulation/persistence checks passed:
 

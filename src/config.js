@@ -1,4 +1,10 @@
-export const CONFIG = Object.freeze({version:1,saveKey:'challenger-tycoon-v1',startingCash:1000,dayLength:480,offlineCap:14400,tile:24,gridWidth:15,gridHeight:15,maxCustomers:24});
+export const CONFIG = Object.freeze({version:2,saveKey:'challenger-tycoon-v1',startingCash:1000,dayLength:480,offlineCap:14400,tile:24,gridWidth:15,gridHeight:15,maxCustomers:24,secondCheckoutCost:1200});
+export const RESEARCH = Object.freeze([
+ {id:'pos',name:'Quick-scan checkout',cost:25,cash:650,unlock:6,description:'Both checkouts process purchases 25% faster. More throughput, more stock pressure.'},
+ {id:'bundles',name:'Smarter bundle demos',cost:30,cash:800,unlock:7,description:'Accessory attachment rises from 40% to 65%. Requires nearby stocked Accessories.'},
+ {id:'reorder',name:'Supplier standing orders',cost:40,cash:1000,unlock:7,description:'Aisha can order discounted deliveries automatically at your chosen stock threshold.'},
+ {id:'routing',name:'Rain-ready dispatch',cost:30,cash:850,unlock:8,description:'Standard supplier deliveries take 20s instead of 35s. Rain still adds 15s.'}
+]);
 export const PRODUCTS = Object.freeze({
  mobile:{name:'Mobile',fixture:'Phone display',price:249,cost:155,capacity:5,build:450,unlock:1,color:'#79b8ca',icon:'▣',description:'Everyday phones. Your first little department.'},
  computing:{name:'Computing',fixture:'Laptop display',price:649,cost:420,capacity:4,build:1100,unlock:3,color:'#9e91c5',icon:'▰',description:'Bigger baskets, more cash tied up in stock.'},

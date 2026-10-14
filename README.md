@@ -1,12 +1,18 @@
 # Challenger Store Tycoon
 
-A playable, offline-first PWA of a Singapore electronics shop. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
+A playable, animated, offline-first PWA of a Singapore electronics shop. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
+
+## Release 1.1: illustrated and animated
+
+The artwork direction is now contemporary cozy 2.5D. The original retro pixel-art renderer has been replaced. This release adds articulated walking, idle, browsing and cashier poses; animated supplier vans and upgrade feedback; two independent checkout lanes; delayed supplier deliveries; research; and automatic reorder policies. Version 1 saves migrate to schema 2 without changing cash or inventory.
+
+39 code tests pass. The game world was inspected through independent renderer output. The full browser suite passed in release 1.0, but could not be rerun for 1.1 after the browser-testing connection disconnected. Browser/device retesting remains necessary for this redesigned release.
 
 ## Put it on GitHub Pages
 
 1. Unzip the package.
 2. Create a GitHub repository, for example `challenger-store-tycoon`.
-3. Upload the **contents of the `challenger-store-tycoon` folder** into the repository root. `index.html`, `style.css`, `manifest.webmanifest`, `sw.js`, `src/`, and `icons/` must be at the top level. Do not upload the ZIP itself or put the entire enclosing folder inside another folder.
+3. Upload the **contents of the `challenger-store-tycoon` folder** into the repository root. `index.html`, `style.css`, `manifest.webmanifest`, `sw.js`, `game-theme.css`, `src/`, `assets/`, and `icons/` must be at the top level. Do not upload the ZIP itself or put the entire enclosing folder inside another folder.
 4. Open **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**, select **main**, and choose **/(root)**. Save.
 5. Once GitHub finishes publishing, open `https://YOUR-USERNAME.github.io/challenger-store-tycoon/`.
 
@@ -41,7 +47,11 @@ Phones are portrait-first. Tablets and unfolded screens support both orientation
 
 ## What is included
 
-- Original code-drawn top-down pixel art: displays, phones, laptops, customers, staff, plants, tiled shop floor, HDB surroundings, sheltered frontage and MRT wayfinding.
+- Original illustrated 2.5D shop fittings and plants, generated for this game; a hand-authored Singapore environment; and articulated character animation.
+- Walk cycles, idle posture, browsing/reaching, cashier scanning, supplier-van arrival and upgrade feedback.
+- Two checkouts with distinct queue slots and route/wait-aware lane choices.
+- Standard discounted deliveries, express deliveries and capacity reservations.
+- Four research projects, earned research points, and Aisha’s configurable reorder policy.
 - Customer browsing, walkable tile routes, checkout queues, impatience, purchases and lost sales.
 - Five progressively unlocked departments: Mobile, Computing, Accessories, Gaming and Audio.
 - Cash, stock costs, display upgrades, positioning strategies, accessory attachment and three floor expansions.
@@ -55,9 +65,17 @@ Phones are portrait-first. Tablets and unfolded screens support both orientation
 
 ## Honest release scope
 
-This is a **substantial playable first release**, not the completed 187-section production roadmap. Later releases still need research trees, repairs, supplier logistics, multiple-store network/postgame, richer staff stories, cosmetics, seasonal content, expanded requests and late-game prestige balancing. The music is one original loop with SFX, rather than the proposed multi-theme soundtrack. No real vouchers, cashback, CRM backend, cloud sync, account service or marketing console is connected.
+This is a **substantial playable first release**, not the completed 187-section production roadmap. Later releases still need repairs, more advanced supplier contracts, multiple-store network/postgame, richer staff stories, cosmetics, seasonal content, expanded requests and late-game prestige balancing. The music is one original loop with SFX, rather than the proposed multi-theme soundtrack. No real vouchers, cashback, CRM backend, cloud sync, account service or marketing console is connected.
 
-Layout and gameplay have automated Chromium checks. Real iOS Safari/Android devices, hardware folding transitions, battery/thermal testing, long-session balancing and new-player playtesting remain release gates before putting this inside ValueClub. There is no evidence yet for an “award-winning” quality claim.
+The preceding release had automated Chromium layout and gameplay checks; this redesigned release still needs those checks rerun. Real iOS Safari/Android devices, hardware folding transitions, battery/thermal testing, long-session balancing and new-player playtesting remain release gates before putting this inside ValueClub. There is no evidence yet for an “award-winning” quality claim.
+
+## Growing the operation
+
+At level 4, open **Checkouts & queues** from Store. Hire Jamie, then buy the second checkout for $1,200. Jamie operates Till 02; you operate Till 01. Each lane has ten distinct holding positions, leaving the entrance clear. Customers account for travel distance and expected service time when choosing a lane.
+
+At level 6, select a display to choose a supplier shipment. Standard deliveries cost roughly 12% less than local restock and take 35 seconds; rain adds 15 seconds to new standard shipments. Express stock costs roughly 15% more and arrives in 8 seconds. Unit prices are rounded to whole Store Cash. Delivery spaces are reserved so inventory can never be ordered twice into the same shelf capacity. Existing shipments retain the ETA quoted when ordered.
+
+Store purchases from level 6 earn one Research Point. Open **Stockroom & research** from Store to choose quick-scan checkout, better bundle demos, standing supplier orders or rain-ready dispatch. Each project also costs cash. Supplier standing orders let Aisha use a cheaper delayed delivery instead of instant local restock; the reorder threshold makes you choose how much stock to keep ahead of the van. Delaying too long can lose sales, while ordering early ties up cash.
 
 ## Saves and offline trading
 
@@ -67,7 +85,7 @@ If no teammate is hired, the store closes while you are away. With a teammate, t
 
 A supplier advance is available when all displays are empty and cash cannot afford stock. It is repaid at $20 per in-store purchase. This provides recovery without a Game Over. In this prototype, wages beyond available cash are waived and shown in the daily report.
 
-The save import accepts version 1 only. Invalid amounts, product IDs, overlapping fixtures, blocked routes and oversized inputs are rejected. This guards accidental corruption; it is **not anti-cheat protection**. All gameplay cash and XP are client-side and editable. They must never authorize real rewards.
+The save import accepts version 1 (migrated automatically) and version 2. The local storage key remains `challenger-tycoon-v1` so existing shops are found. Invalid amounts, product IDs, overlapping fixtures, blocked routes and oversized inputs are rejected. This guards accidental corruption; it is **not anti-cheat protection**. All gameplay cash and XP are client-side and editable. They must never authorize real rewards.
 
 ## Run and test locally
 
@@ -91,7 +109,7 @@ npx playwright install chromium
 node tests/browser.cjs
 ```
 
-`CHROME_PATH` can point to an existing Chrome binary. The optional test suite checks gameplay UI, save/reload, ten viewport sizes, host-provided book/tabletop hinges and actual offline reload under a repository subpath. Screenshots go into the ignored `test-results/` folder. No development dependency is needed for hosting or playing.
+`CHROME_PATH` can point to an existing Chrome binary. The optional test suite checks gameplay UI, save/reload, ten viewport sizes, host-provided book/tabletop hinges and actual offline reload under a repository subpath. Screenshots go into the ignored `test-results/` folder. The suite is included and updated for the new renderer; it must be rerun when a browser-testing environment is available. No development dependency is needed for hosting or playing.
 
 ## Debug playtesting
 
@@ -119,7 +137,7 @@ Upload the changed source and increment `VERSION` in `sw.js` for each published 
 
 ## Architecture and design
 
-`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns original pixel art and camera; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
+`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns the illustrated world and camera; `art.js` loads the asset atlas; `characters.js` owns the animation rig; `checkouts.js` routes queues; `operations.js` handles suppliers and research; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
 
 The game runs fixed 50ms simulation steps separately from rendering. NPCs recalculate paths after layout changes, not every frame. Saves happen on actions, periodic checkpoints and lifecycle changes.
 
