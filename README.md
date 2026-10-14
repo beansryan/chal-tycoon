@@ -2,13 +2,17 @@
 
 A playable, animated, offline-first PWA of a Singapore electronics shop in a Jewel-inspired mall. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
 
-## Release 1.3: Jewel mall and continuous customer routes
+## Release 1.4: connected mall and drag placement
 
-The store now opens onto an indoor mall promenade, backed by an original Jewel-inspired glass dome, tropical garden and animated waterfall. A transparent store shell replaces the outdoor shophouse scene and repeated pavement. The playable floor uses a shallow depth projection while whole character sprites stay upright.
+The shop, neighboring café and fashion store, indoor garden and promenade now form one connected scene that shares the same camera. Larger whole-body characters move smoothly between simulation steps. The actual Challenger logo fits the charcoal/cyan storefront. White store fixtures replace the orange cabinets; the HUD follows the same cool retail palette.
 
-Customers start beyond the visible corridor, approach the doorway, browse and pay, then walk back through the corridor and out of frame. Passing mall shoppers add movement without affecting store sales. Existing saves, inventory and layout remain compatible.
+Two Skytrain services pass in opposite directions. The waterfall ramps on and off, with moving water and spray; its timing is a fictional ambient cycle. Pause freezes ambient motion and reduced motion removes train movement and water streak motion.
 
-40 code checks and 29 headless Chromium browser checks pass, including continuous arrivals/departures, corridor save restoration, gameplay actions, ten viewport sizes, offline artwork under a repository subpath and service-worker updates. Physical-device playtesting remains outstanding.
+Choose a display to see its preview immediately. Drag the preview across the snapped grid, then confirm or cancel. Green/red footprints use the same occupancy and route checks as the simulation. Dragging empty floor pans, pinching zooms, and cancelling a move preserves the original display and inventory.
+
+Progression earns 4 XP per ordinary sale rather than 10. A fresh Mobile-only shop needs 60 ordinary sales to reach level 3. Restock costs now leave less surplus, so upgrades and hiring compete with working capital. Existing XP, layout, stock and cash are preserved.
+
+46 code checks and 35 headless Chromium browser checks pass. Physical-device and player testing remains outstanding.
 
 ## Put it on GitHub Pages
 
@@ -38,7 +42,7 @@ Visit once online and let the game finish loading before relying on offline play
 2. Tap the phone display. **Restock** buys as many units as your cash allows; **Upgrade** increases capacity by three.
 3. Use **Goals** to collect completed shop milestones.
 4. At level 3, choose Computing or strengthen Mobile, and hire your first teammate.
-5. Enter **Build**, choose a display, tap a clear floor tile, then confirm. A green outline means routes remain open. Moving furniture is an explicit action; ordinary dragging only pans the camera.
+5. Enter **Build**, choose a display, drag its preview to a clear spot, then confirm. A green outline means routes remain open. Moving furniture is an explicit action; dragging empty floor pans the camera.
 6. Computing and Gaming can attach an accessory sale when an Accessories display is within four tiles and has stock.
 7. At level 5, click-and-collect orders and promotions add pressure. Orders use the same inventory as your store.
 8. Trading days last eight real minutes at 1× speed. Wages are charged at closing. The report points out whether stock or queues cost you sales.

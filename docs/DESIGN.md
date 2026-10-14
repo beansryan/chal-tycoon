@@ -19,17 +19,16 @@ The sources below grounded the design and technical approach. Design choices are
 
 Research into cognitive load, flow, telemetry-assisted balancing and multi-week progression should continue during playtesting. This initial research pass does not exhaust the master brief’s research agenda.
 
-## Art and animation direction (release 1.3)
+## Art and animation direction (release 1.4)
 
-The latest reference adds a mall setting. The game uses an original Jewel-inspired panorama with a glass roof, tropical indoor gardens, waterfall, glass walkways, escalator and lift. A separately generated transparent Challenger store shell sits on the promenade. This is a fictional game layout, not a measured reproduction of an actual Jewel unit. No user reference image is redistributed.
+`assets/jewel-world.png` is a connected Jewel-inspired indoor scene. Its central playable rectangle occupies source x34–66%, y70–90%; the camera projects this floor, fixtures, shoppers and ambient animation together. Neighboring shops share the architecture and corridor. The floor depth is derived from that rectangle and the image aspect ratio; placement and hit testing use the inverse of the same transform.
 
-Assets are `assets/mall-panorama.png`, `assets/mall-shop.png`, `assets/fixture-atlas.png` and `assets/character-atlas.png`. The prior shophouse image and repeated pavement are removed. The mall fills the viewport; the playable store moves with the camera. The floor has a 0.33 vertical depth projection. Characters and display artwork retain upright proportions. All input, placement outlines and camera operations use the same projection.
+`assets/jewel-fixtures.png` contains nine whole white/light-gray shop fittings. `assets/character-atlas.png` contains whole-body directional poses, rendered at 42 logical pixels tall. Fixed-step simulation positions are interpolated for display. Zoom uses a damped transition. The original photo guided the white surfaces and black legs; the user's reference images are not shipped.
 
-Customer states now include approach. A route starts beyond the current visible corridor, travels to the door and continues into the store. After a purchase or abandoned visit, the same customer walks through the door, along the promenade and beyond the frame before being removed. Extending the camera view also extends a departing customer's exit waypoint. Passing shoppers are ambient only; they never create sales or affect inventory.
+`assets/challenger-logo.png` is the actual transparent white wordmark from Challenger's official storefront footer: https://online.challenger.sg/cdn/shop/files/Challenger_-_Logo_white_1.png?v=1755865914&width=2000 . It is fit inside the fascia without altering its proportions. The scene and pose artwork were created for this project; the Challenger logo remains the brand's existing artwork.
 
-Waterfall streaks animate behind glass walkways. Reduced motion stops decorative waterfall and pose animation. The mall remains indoors during rain; weather still affects game demand but no rain falls on the shop floor.
+Water is drawn over the dry oculus with separate spans behind the guideways, flowing streaks and mist. A fictional 100-second cycle ramps on over five seconds, begins ramping off at 65 seconds and stays dry after 74 seconds. Two procedural three-car trains traverse the guideways in opposite directions with offset 82-second schedules. Pausing freezes ambient animation; reduced motion uses a static water curtain and hides trains.
 
-The interface keeps resource counters and a milestone ticket over the scene. A wood action tray opens illustrated stock, staffing and research windows. See [UI_RESEARCH.md](UI_RESEARCH.md).
 
 ## Audio bible
 
@@ -39,7 +38,7 @@ The opening release uses one tune; morning/rush/rain/closing themes and richer p
 
 ## Economy
 
-Phones sell for $249 and cost $155 to replenish. Initial five-unit inventory is already owned. Cash receipts are gross sales; the daily report separately includes stock purchases, hiring, upgrades and wages as cash outflows. Cash flow is not a full accrual profit-and-loss statement.
+Phones sell for $249 and cost $205 to replenish. Initial five-unit inventory is already owned. Cash receipts are gross sales; the daily report separately includes stock purchases, hiring, upgrades and wages as cash outflows. Cash flow is not a full accrual profit-and-loss statement.
 
 Premium raises selling price but rejects some budget shoppers. Budget lowers prices and avoids that premium rejection; it does not yet introduce a fully demand-elastic market. Accessory attachment depends on distance and available stock. Promotion traffic costs working capital and lowers sale prices.
 

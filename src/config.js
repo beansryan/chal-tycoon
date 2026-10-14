@@ -6,11 +6,11 @@ export const RESEARCH = Object.freeze([
  {id:'routing',name:'Rain-ready dispatch',cost:30,cash:850,unlock:8,description:'Standard supplier deliveries take 20s instead of 35s. Rain still adds 15s.'}
 ]);
 export const PRODUCTS = Object.freeze({
- mobile:{name:'Mobile',fixture:'Phone display',price:249,cost:155,capacity:5,build:450,unlock:1,color:'#79b8ca',icon:'▣',description:'Everyday phones. Your first little department.'},
- computing:{name:'Computing',fixture:'Laptop display',price:649,cost:420,capacity:4,build:1100,unlock:3,color:'#9e91c5',icon:'▰',description:'Bigger baskets, more cash tied up in stock.'},
- accessories:{name:'Accessories',fixture:'Accessory rack',price:39,cost:15,capacity:12,build:600,unlock:4,color:'#e1b56c',icon:'♧',description:'Small baskets, healthy margins. Bundles beside Computing or Gaming.'},
- gaming:{name:'Gaming',fixture:'Gaming station',price:179,cost:100,capacity:6,build:1700,unlock:6,color:'#cb8299',icon:'✥',description:'Gamer traffic. A natural partner for Accessories.'},
- audio:{name:'Audio',fixture:'Listening bar',price:129,cost:72,capacity:6,build:1400,unlock:7,color:'#80b998',icon:'♫',description:'A destination for enthusiasts and casual browsers.'}
+ mobile:{name:'Mobile',fixture:'Phone display',price:249,cost:205,capacity:5,build:450,unlock:1,color:'#79b8ca',icon:'▣',description:'Everyday phones. Your first little department.'},
+ computing:{name:'Computing',fixture:'Laptop display',price:649,cost:550,capacity:4,build:1100,unlock:3,color:'#9e91c5',icon:'▰',description:'Bigger baskets, more cash tied up in stock.'},
+ accessories:{name:'Accessories',fixture:'Accessory rack',price:39,cost:25,capacity:12,build:600,unlock:4,color:'#e1b56c',icon:'♧',description:'Small baskets, healthy margins. Bundles beside Computing or Gaming.'},
+ gaming:{name:'Gaming',fixture:'Gaming station',price:179,cost:140,capacity:6,build:1700,unlock:6,color:'#cb8299',icon:'✥',description:'Gamer traffic. A natural partner for Accessories.'},
+ audio:{name:'Audio',fixture:'Listening bar',price:129,cost:100,capacity:6,build:1400,unlock:7,color:'#80b998',icon:'♫',description:'A destination for enthusiasts and casual browsers.'}
 });
 export const PEOPLE = [
  {name:'Neighbour',quote:'Got stock?',patience:48,color:'#dcb26e',likes:'mobile'},
