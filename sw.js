@@ -1,0 +1,9 @@
+const VERSION='tycoon-v1.0.0';
+const CACHE=VERSION+'-'+self.registration.scope;
+const ASSETS=['./','./index.html','./style.css','./manifest.webmanifest','./src/app.js','./src/config.js','./src/engine.js','./src/save.js','./src/audio.js','./src/renderer.js','./src/input.js','./src/ui.js','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/apple-touch-icon.png'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
+// Wait for old tabs to close before activating an update. This keeps an active
+// session on one coherent version and never forces a reload mid-sale.
+self.addEventListener('activate',event=>event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('tycoon-')&&k.endsWith(self.registration.scope)&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
+self.addEventListener('message',event=>{if(event.data?.type==='ACTIVATE_UPDATE')self.skipWaiting()});
+self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;const url=new URL(event.request.url);if(url.origin!==location.origin||!url.href.startsWith(self.registration.scope))return;event.respondWith((async()=>{const cache=await caches.open(CACHE);if(event.request.mode==='navigate'){return await cache.match('./index.html')||fetch(event.request)}const hit=await cache.match(event.request,{ignoreSearch:true});if(hit)return hit;return fetch(event.request)})())});

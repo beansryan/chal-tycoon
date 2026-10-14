@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#263d43">
+  <meta name="description" content="A cosy pixel-art electronics shop sim set in Singapore. Start small. Build something extraordinary.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>Challenger Store Tycoon</title>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Challenger Store Tycoon home"><span class="brandmark">C<span>+</span></span><span>CHALLENGER<small>STORE TYCOON</small></span></a>
+    <div class="resources"><div><small>STORE CASH</small><strong id="cash">$1,000</strong></div><div><small>STORE LEVEL</small><strong id="level">01</strong></div><div class="rating"><small>REPUTATION</small><strong id="reputation">0</strong></div></div>
+    <button class="icon-button" id="settings" aria-label="Open settings">⚙</button>
+  </header>
+  <aside class="rail"><div class="rail-head"><span class="eyebrow">YOUR LITTLE EMPIRE</span><h2 id="location">Heartland<br>Tech Shop</h2><p>Singapore · Block 01</p></div><div id="railnav"></div><div class="rail-foot"><span class="status-dot"></span> <span id="save-status">Autosave on</span><p>Small shop. Big dreams.</p></div></aside>
+  <main class="world-wrap">
+    <div class="world-top"><div><span class="eyebrow" id="day-label">DAY 01 · MONDAY</span><strong id="time-label">Getting ready</strong></div><div class="weather-badge" id="weather-label">☀ Sunny</div></div>
+    <canvas id="world" tabindex="0" aria-label="Shop floor. Tap a display to manage stock. Drag to look around. Use the Store panel for accessible display controls."></canvas>
+    <div class="world-tools"><button id="zoom-out" aria-label="Zoom out">−</button><button id="recenter" aria-label="Centre shop view">⌖</button><button id="zoom-in" aria-label="Zoom in">+</button></div>
+    <div class="world-bottom"><span id="world-hint">Your story starts with one little shop.</span><button id="speed" aria-label="Change simulation speed">▶ 1×</button><button id="pause" aria-label="Pause simulation">Ⅱ</button></div>
+    <div id="placement-bar" hidden><span id="placement-hint">Tap an empty tile</span><button id="place-confirm">Place here</button><button id="place-cancel">Cancel</button></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <section class="inspector" aria-label="Management panel"><div class="inspector-heading"><span class="eyebrow" id="panel-kicker">MORNING, BOSS</span><button id="panel-close" class="icon-button" aria-label="Back to store">×</button></div><div id="panel"></div></section>
+  <nav class="bottom-nav" aria-label="Game navigation"></nav>
+  <footer class="desktop-footer"><span>MADE FOR THE EVERYDAY ADVENTURE</span><span>SGD · LOCAL SAVE · OFFLINE READY</span></footer>
+</div>
+<dialog id="modal"><div id="modal-content"></div></dialog>
+<noscript>This game needs JavaScript enabled. No account or network connection is required after the first load.</noscript>
+<script type="module" src="./src/app.js"></script>
+</body>
+</html>
