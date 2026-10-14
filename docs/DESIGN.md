@@ -19,17 +19,13 @@ The sources below grounded the design and technical approach. Design choices are
 
 Research into cognitive load, flow, telemetry-assisted balancing and multi-week progression should continue during playtesting. This initial research pass does not exhaust the master brief’s research agenda.
 
-## Art and animation direction (updated)
+## Art and animation direction (release 1.2)
 
-The user superseded the original GBA/pixel-art requirement with **contemporary cozy illustrated 2.5D**. Game-design research about agency, daily rhythm and touch remains relevant; the prior handheld references no longer define the artwork.
+The latest user references supersede the prior smooth 2.5D direction. The game now uses detailed warm pixel scenery, textured amber wood furniture and coherent compact chibi characters. Original assets: `assets/shop-environment.png`, `assets/fixture-atlas.png` (nine cells), and `assets/character-atlas.png` (sixteen complete poses). Commercial reference art is not included. See [UI_RESEARCH.md](UI_RESEARCH.md).
 
-The world uses smooth high-DPI Canvas rendering, a warm cutaway shop, soft shadows, maple-and-cream fixtures, coral signage, tropical plants and HDB surroundings. `assets/shop-atlas.png` is an original generated asset atlas made specifically for this game, with no third-party sprite packs. The renderer selects known crop rectangles from the atlas at runtime. Iconography and the SVG install icon are hand-authored locally.
+The renderer uses a 32-unit navigation tile, nearest-neighbour scaling and alpha-trimmed full sprites aligned by their feet. Characters select directional walk, browse and service frames. Side poses also alternate a one-pixel step; front/back walks cycle full-body frames. Reduced motion holds a stable pose and removes weather streaks. Cash and delivery feedback remain readable.
 
-Characters use a procedural rig with independent legs, arms, torso and head. Front-facing head illustrations come from the original atlas; back/side treatment and pose articulation come from the rig. There are walking strides, subtle idle motion, browsing/reaching and cashier scan poses. The current rig is lightweight 2D articulation inside a 2.5D environment, not a full skeletal 3D character system or a bespoke frame-by-frame animation set. The avatar variants and motion can be refined further with player feedback.
-
-Deliveries trigger a stock van arriving at the frontage and upgrades trigger a restrained display bounce. Reduced motion removes decorative articulation, weather streaks, arrival movement and bounce while retaining stock changes, text and selection. Rendering quality never changes the economy.
-
-The underlying navigation grid remains integer tile-based. The renderer now maps a tile to 72 world units; camera pan/zoom and touch placement use that renderer tile size. Art smoothing is enabled; pixel filtering and hard retro menu ornament were removed.
+The interface keeps resource counters and one milestone ticket over the scene. A compact wood action tray opens illustrated fitting, staffing, stock and research windows. Closing a window restores the unobstructed world. Day-end reports appear at closing or on request.
 
 ## Audio bible
 

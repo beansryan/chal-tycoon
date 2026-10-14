@@ -18,19 +18,21 @@
 <div id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="Challenger Store Tycoon home"><span class="brandmark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 14v13h20V14" fill="#ebd5b0"/><path d="M4 13l3-7h18l3 7" fill="#c86b52"/><path d="M4 13h24M9 7l-1 6m8-6v6m7-6 1 6" stroke="#f7e2be" stroke-width="2"/><path d="M8 17h7v7H8m10-7h5v10h-5" fill="#75999c"/></svg></span><span>CHALLENGER<small>STORE TYCOON</small></span></a>
-    <div class="resources"><div><small>STORE CASH</small><strong id="cash">$1,000</strong></div><div><small>STORE LEVEL</small><strong id="level">01</strong></div><div class="rating"><small>REPUTATION</small><strong id="reputation">0</strong></div></div>
+    <div class="resources"><div class="cash-counter"><span class="hud-coin" aria-hidden="true">$</span><small class="sr-only">Store Cash</small><strong id="cash">$1,000</strong></div><div class="level-counter"><span class="hud-star" aria-hidden="true">★</span><small>Lv.</small><strong id="level">01</strong><span class="hud-xp"><i id="hud-xp"></i></span></div><div class="rating"><small>Reputation</small><strong id="reputation">0</strong></div></div>
     <button class="icon-button" id="settings" aria-label="Open settings">⚙</button>
   </header>
   <aside class="rail"><div class="rail-head"><span class="eyebrow">OUTLET 01</span><h2 id="location">Heartland<br>Tech Shop</h2><p>Singapore · Block 01</p></div><div id="railnav"></div><div class="rail-foot"><span class="status-dot"></span> <span id="save-status">Autosave on</span><p>Block 01 · Singapore</p></div></aside>
   <main class="world-wrap">
     <div class="world-top"><div><span class="eyebrow" id="day-label">DAY 01 · MONDAY</span><strong id="time-label">Getting ready</strong></div><div class="weather-badge" id="weather-label">☀ Sunny</div></div>
     <canvas id="world" tabindex="0" aria-label="Shop floor. Tap a display to manage stock. Drag to look around. Use the Store panel for accessible display controls."></canvas>
+    <button id="goal-ticket" class="goal-ticket" data-action="tab" data-tab="goals"><span class="ticket-star">★</span><span><small>Next milestone</small><strong id="goal-title">First sale</strong><span id="goal-progress">0 / 1</span></span></button>
+    <button id="order-ticket" class="order-ticket" data-action="tab" data-tab="orders" hidden>Orders waiting</button>
     <div class="world-tools"><button id="zoom-out" aria-label="Zoom out">−</button><button id="recenter" aria-label="Centre shop view">⌖</button><button id="zoom-in" aria-label="Zoom in">+</button></div>
     <div class="world-bottom"><span id="world-hint">Your story starts with one little shop.</span><button id="speed" aria-label="Change simulation speed">▶ 1×</button><button id="pause" aria-label="Pause simulation">Ⅱ</button></div>
     <div id="placement-bar" hidden><span id="placement-hint">Tap an empty tile</span><button id="place-confirm">Place here</button><button id="place-cancel">Cancel</button></div>
     <div id="toast" role="status" aria-live="polite"></div>
   </main>
-  <section class="inspector" aria-label="Management panel"><div class="inspector-heading"><span class="eyebrow" id="panel-kicker">MORNING, BOSS</span><button id="panel-close" class="icon-button" aria-label="Back to store">×</button></div><div id="panel"></div></section>
+  <section class="inspector" aria-label="Management panel"><div class="inspector-heading"><span class="eyebrow" id="panel-kicker">MORNING, BOSS</span><button id="panel-close" class="icon-button" aria-label="Close menu">×</button></div><div id="panel"></div></section>
   <nav class="bottom-nav" aria-label="Game navigation"></nav>
   <footer class="desktop-footer"><span>BLOCK 01 · SINGAPORE</span><span>SGD · LOCAL SAVE · OFFLINE READY</span></footer>
 </div>

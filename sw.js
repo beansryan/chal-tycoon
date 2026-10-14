@@ -1,6 +1,6 @@
-const VERSION='tycoon-v1.1.0';
+const VERSION='tycoon-v1.2.0';
 const CACHE=VERSION+'-'+self.registration.scope;
-const ASSETS=['./','./index.html','./style.css','./game-theme.css','./manifest.webmanifest','./src/app.js','./src/config.js','./src/engine.js','./src/checkouts.js','./src/operations.js','./src/save.js','./src/audio.js','./src/renderer.js','./src/art.js','./src/characters.js','./assets/shop-atlas.png','./src/input.js','./src/ui.js','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/apple-touch-icon.png'];
+const ASSETS=['./','./index.html','./style.css','./game-theme.css','./manifest.webmanifest','./src/app.js','./src/config.js','./src/engine.js','./src/checkouts.js','./src/operations.js','./src/save.js','./src/audio.js','./src/renderer.js','./src/art.js','./src/characters.js','./assets/fixture-atlas.png','./assets/character-atlas.png','./assets/shop-environment.png','./src/input.js','./src/ui.js','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/apple-touch-icon.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 // Wait for old tabs to close before activating an update. This keeps an active
 // session on one coherent version and never forces a reload mid-sale.

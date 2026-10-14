@@ -1,42 +1,20 @@
 # Validation and playtest checklist
 
-## Release 1.1 validation
+## Release 1.2 validation
 
-39 code tests passed: 16 original simulation/persistence checks, 14 operations/migration checks, four character-pose tests, and five presentation/cache tests. The full shop scene was rendered independently at wide and phone viewport sizes and inspected. These checks validate renderer commands and assets, but do not replace a browser run.
+37 Node checks pass: economy and persistence, routes and stock reservations, second checkout, supplier deliveries, research and automation, version-one save migration, whole-body animation directions, reduced motion, contextual controls and offline asset coverage.
 
-The browser-testing connection became unavailable while building 1.1. The redesigned DOM/CSS, actual animation timing, install/update flow and fold layouts must be rechecked in a browser. The included browser suite is updated for the illustrated renderer. The successful checks below refer to release 1.0 and must not be interpreted as successful 1.1 browser validation.
+28 headless Chromium checks pass:
 
-## Original release validation (historical)
+- First sale, restock, upgrades, build confirmation, staff hire and online order through the UI.
+- Panning does not select or move a fixture; saves survive reload.
+- Second checkout, supplier order/arrival and research controls.
+- Ten viewport sizes: 320×568, 390×844, 430×932, 768×1024, 820×1180, 1024×1366, 1024×768, 1366×1024, 844×390 and 700×600.
+- Book and tabletop hinge layouts keep world and management panes separate.
+- Closing report continuation; no uncaught browser errors.
+- Manifest, fully cached offline reload under `/repo/`, and explicit service-worker update activation.
 
-16 Node simulation/persistence checks passed:
-
-- First sale within 25 seconds and correct stock/cash movement.
-- No overselling during a rush; no negative cash from denied actions.
-- Partial restock at actual unit costs.
-- Collision/path rejection, valid placement and move preservation.
-- Staff automation capacity and cash invariants over two trading days.
-- Day-closing wage deductions.
-- Shared-stock online fulfilment and one-time milestone claims.
-- Four-hour offline cap with finite inventory; no unattended earnings.
-- Versioned save restoration; corrupt/injected content rejection.
-- Supplier recovery and debt repayment.
-- Offline processing emits no repeated UI/audio events.
-- Customer-care training adds patience.
-
-25 headless Chromium browser checks passed:
-
-- Open store, first sale, restock, upgrade, build confirmation and staff hire through UI.
-- Panning does not fire a ghost selection or move furniture.
-- Online orders use shop stock; save survives reload.
-- Ten viewport checks: 320×568, 390×844, 430×932, 768×1024, 820×1180, 1024×1366, 1024×768, 1366×1024, 844×390 and 700×600.
-- Host-provided vertical book and horizontal tabletop hinges keep world/management panes separate.
-- Daily report continuation and no uncaught browser exceptions.
-- Install manifest and actual offline reload under `/repo/`.
-- Explicit service-worker update activates and reloads.
-
-Additional Chromium touch-event checks confirmed direct display selection, no ghost selection after touch panning, and bounded pinch zoom returning to the idle gesture state. These are browser emulation checks, not physical-device tests.
-
-Phone and tablet screenshots were visually reviewed. Automated viewport checks assert no horizontal document overflow, a nonzero canvas and store continuity. They do **not** verify every accessibility requirement or every real hardware behaviour.
+Automated viewport checks validate document overflow, canvas dimensions, minimum navigation target sizes and progress continuity. They do not substitute for physical-device or player testing.
 
 ## Physical-device gates still needed
 

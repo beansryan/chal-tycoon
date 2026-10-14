@@ -2,11 +2,11 @@
 
 A playable, animated, offline-first PWA of a Singapore electronics shop. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
 
-## Release 1.1: illustrated and animated
+## Release 1.2: detailed pixel art and a game HUD
 
-The artwork direction is now contemporary cozy 2.5D. The original retro pixel-art renderer has been replaced. This release adds articulated walking, idle, browsing and cashier poses; animated supplier vans and upgrade feedback; two independent checkout lanes; delayed supplier deliveries; research; and automatic reorder policies. Version 1 saves migrate to schema 2 without changing cash or inventory.
+Original warm pixel artwork now covers the shop environment, nine furniture types and complete animated characters. Directional walking, browsing and cashier poses use full-body frames with aligned feet. A compact resource HUD and wood-framed action tray leave the world visible; illustrated build menus and stock/staff/research windows open on demand. See [UI research](docs/UI_RESEARCH.md) for the actual game references reviewed.
 
-39 code tests pass. The game world was inspected through independent renderer output. The full browser suite passed in release 1.0, but could not be rerun for 1.1 after the browser-testing connection disconnected. Browser/device retesting remains necessary for this redesigned release.
+37 code checks and 28 headless Chromium browser checks pass, including gameplay actions, ten viewport sizes, save reload, fold layouts, offline launch under a repository subpath and explicit service-worker updates. Physical-device playtesting remains outstanding.
 
 ## Put it on GitHub Pages
 
@@ -36,19 +36,19 @@ Visit once online and let the game finish loading before relying on offline play
 2. Tap the phone display. **Restock** buys as many units as your cash allows; **Upgrade** increases capacity by three.
 3. Use **Goals** to collect completed shop milestones.
 4. At level 3, choose Computing or strengthen Mobile, and hire your first teammate.
-5. Enter **Build**, choose a display, tap a clear floor tile, then confirm. An `OK` outline means routes remain open. Moving furniture is an explicit action; ordinary dragging only pans the camera.
+5. Enter **Build**, choose a display, tap a clear floor tile, then confirm. A green outline means routes remain open. Moving furniture is an explicit action; ordinary dragging only pans the camera.
 6. Computing and Gaming can attach an accessory sale when an Accessories display is within four tiles and has stock.
 7. At level 5, click-and-collect orders and promotions add pressure. Orders use the same inventory as your store.
 8. Trading days last eight real minutes at 1× speed. Wages are charged at closing. The report points out whether stock or queues cost you sales.
 
-Drag to pan; pinch or use +/− to zoom; use the centre button to reset the camera. Arrow keys pan the focused canvas. Every display also has a labelled button in the Store panel, so inspecting tiny sprites is optional.
+Drag to pan; pinch or use +/− to zoom; use the centre button to reset the camera. Arrow keys pan the focused canvas. Every display also has a labelled button in the Shop menu, so inspecting tiny sprites is optional.
 
-Phones are portrait-first. Tablets and unfolded screens support both orientations. Compact windows use bottom controls; wide landscape windows use a navigation rail and inspector. The browser PWA does not force an orientation lock.
+Phones are portrait-first. Tablets and unfolded screens support both orientations. All screens use a compact action tray and contextual management windows. The browser PWA does not force an orientation lock.
 
 ## What is included
 
-- Original illustrated 2.5D shop fittings and plants, generated for this game; a hand-authored Singapore environment; and articulated character animation.
-- Walk cycles, idle posture, browsing/reaching, cashier scanning, supplier-van arrival and upgrade feedback.
+- Original detailed pixel shop environment, furniture and character atlases, created for this game.
+- Directional walk cycles, browsing/reaching, cashier service and delivery feedback.
 - Two checkouts with distinct queue slots and route/wait-aware lane choices.
 - Standard discounted deliveries, express deliveries and capacity reservations.
 - Four research projects, earned research points, and Aisha’s configurable reorder policy.
@@ -67,7 +67,7 @@ Phones are portrait-first. Tablets and unfolded screens support both orientation
 
 This is a **substantial playable first release**, not the completed 187-section production roadmap. Later releases still need repairs, more advanced supplier contracts, multiple-store network/postgame, richer staff stories, cosmetics, seasonal content, expanded requests and late-game prestige balancing. The music is one original loop with SFX, rather than the proposed multi-theme soundtrack. No real vouchers, cashback, CRM backend, cloud sync, account service or marketing console is connected.
 
-The preceding release had automated Chromium layout and gameplay checks; this redesigned release still needs those checks rerun. Real iOS Safari/Android devices, hardware folding transitions, battery/thermal testing, long-session balancing and new-player playtesting remain release gates before putting this inside ValueClub. There is no evidence yet for an “award-winning” quality claim.
+This release passes automated Chromium layout and gameplay checks. Real iOS Safari/Android devices, hardware folding transitions, battery/thermal testing, long-session balancing and new-player playtesting remain release gates before putting this inside ValueClub. There is no evidence yet for an “award-winning” quality claim.
 
 ## Growing the operation
 
@@ -109,7 +109,7 @@ npx playwright install chromium
 node tests/browser.cjs
 ```
 
-`CHROME_PATH` can point to an existing Chrome binary. The optional test suite checks gameplay UI, save/reload, ten viewport sizes, host-provided book/tabletop hinges and actual offline reload under a repository subpath. Screenshots go into the ignored `test-results/` folder. The suite is included and updated for the new renderer; it must be rerun when a browser-testing environment is available. No development dependency is needed for hosting or playing.
+`CHROME_PATH` can point to an existing Chrome binary. The optional test suite checks gameplay UI, save/reload, ten viewport sizes, host-provided book/tabletop hinges and actual offline reload under a repository subpath. Screenshots go into the ignored `test-results/` folder. The suite is included and passes for this renderer. No development dependency is needed for hosting or playing.
 
 ## Debug playtesting
 
@@ -137,7 +137,7 @@ Upload the changed source and increment `VERSION` in `sw.js` for each published 
 
 ## Architecture and design
 
-`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns the illustrated world and camera; `art.js` loads the asset atlas; `characters.js` owns the animation rig; `checkouts.js` routes queues; `operations.js` handles suppliers and research; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
+`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns the pixel world and camera; `art.js` loads and trims the three original atlases; `characters.js` selects whole-body animation frames; `checkouts.js` routes queues; `operations.js` handles suppliers and research; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
 
 The game runs fixed 50ms simulation steps separately from rendering. NPCs recalculate paths after layout changes, not every frame. Saves happen on actions, periodic checkpoints and lifecycle changes.
 
