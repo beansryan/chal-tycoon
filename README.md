@@ -2,19 +2,20 @@
 
 A playable, animated, offline-first PWA of a Singapore electronics shop in a Jewel-inspired mall. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
 
-## Release 1.9.2: camera stays inside the mall
+## Release 2.1.0: location collections and developer tools
 
-Pan, scroll and zoom stop at the illustrated environment edges. The minimum zoom fills both viewport dimensions, with bounds reapplied during smooth zooms, resizing and orientation changes.
+Six distinct illustrated Challenger interiors now include matching storefront materials, the actual Challenger logo and 15 native placeable/counter assets per collection (90 total). Jewel has a rebuilt garden-gallery interior; its original upper environment, animated water and transit masks remain intact. Each store has an authored floor projection for placement and picking. These are location-inspired designs, not measured replicas.
 
-The graphics now use a shared floor projection, explicit scenery layers and solid foreground silhouettes, native pixel character poses, depth-based size rules and a flowing water material. Walking sprites are smaller, customer and employee artwork stay separate, and all views use one native pixel unit. Stable crown anchors remove frame-height bouncing; the side cycle excludes frames that lose the customer’s bag. The cashier stands further behind the counter with the upper body visible. The entire three-tenant beam now uses the front column boundaries. Challenger’s sign connects to two matching posts down to the floor; the adjacent wood and ivory signs fit the remaining spans. Gameplay and save format are unchanged.
+Open **Settings → Developer tools** in any build. Switch locations without spending expansion cash or moving furniture; choose Follow progression to return. Test controls include cash, level, stock, all staff, research, customers/VIPs, weather, events, 1×/2×/3× speed, time advance, and frozen Jewel water/train presets. Testing changes the current save; use Export save backup first. Full reset has an explicit confirmation, erases game/recovery saves and developer overrides, then returns to Day 1. Cached artwork remains available offline.
 
-- Characters use the exact supplied `character-atlas.png` artwork, with compatible directional walk poses. The renderer preserves each view’s scale and anchors frames by the head centre and foot baseline. Actual row separators prevent the old walk sheet from cutting off feet or including pixels from a neighbouring frame. Outfit palette changes preserve the head artwork.
-- Furniture width follows its actual two-cell footprint and keeps the image’s aspect ratio. Characters and fixtures share a bounded depth scale; near-camera growth is capped.
-- An analytical annular water curtain uses advected noise strands and an accelerated falling profile. It begins at the inner oculus lip, with an eased supply cycle and top-to-bottom draining. No waterfall PNG is loaded. The oculus rim, guideways and foreground garden cover it in the correct order. WebGL renders the material; Canvas 2D provides a fallback. Both train services, the water and corridor passers follow the selected 1×/2×/3× speed. Camera easing stays at normal speed.
-- Near and far trains use separate sizes, the complete three-car image keeps its proportions, and running wheels align to the guideway. Foreground foliage and bridge faces occlude passing trains.
-- Challenger’s charcoal fascia and cyan strip stop at its two tenant boundaries. The cafe and fashion shop have different fascias and their own signs.
 
-See `docs/GRAPHICS_REBUILD.md` for research sources, implementation decisions and validation limits. Phone and desktop rendering, visible train occlusion, texture motion, placement and offline loading are checked. Physical-device testing remains outstanding.
+Five new native environments join Jewel: heartland town centre, PLQ-style mall, Bugis-style basement, city flagship and tech megastore. All use the existing perspective, connected storefront geometry and bounded camera. Water and Skytrains operate only at Jewel. Location names and neighboring tenants are illustrative game settings.
+
+Twelve customer outfits and six staff identities have dedicated transparent front/back/side walking frames (216 native frames across three sheets). Movement follows interpolated world positions and distance-driven gait; standing and paused actors retain stable feet. Selected back frames avoid prop-side swaps.
+
+Gemini's additional fittings, staff, VIPs, regulars, cosmetics and branch network are retained. Claude's mechanics informed shopper budgets, queue-recovery periods, actionable closing reports and next-day weather/event forecasts. The slower eight-minute trading day and measured XP curve are retained. New fixtures start empty; upgrading preserves existing stock; paid supplier reservations remain counted against capacity. Packing benches boost service but require the ordered department's stock, and stock racks reduce costs rather than generating generic products.
+
+Save format 3 accepts versions 1 and 2. Older over-reserved delivery saves are repaired by refunding cancelled excess units. Full legacy accessory stock survives migration. The PWA cache version is separate from save version; settings checks worker versions and refreshes when an update becomes available.
 
 ## Put it on GitHub Pages
 

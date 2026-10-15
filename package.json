@@ -1,6 +1,6 @@
 {
   "name": "challenger-store-tycoon",
-  "version": "1.9.2",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "scripts": {

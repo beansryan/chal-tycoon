@@ -20,10 +20,10 @@ export const GRAPHICS={
 };
 export class FloorProjection{
  constructor(width){this.resize(width)}
- resize(width){this.width=width;const sceneWidth=1200*(width-4)/11;this.scene={x:width*20-sceneWidth/2,y:-350,width:sceneWidth,height:800}}
- point(x,y){const f=GRAPHICS.floor,s=this.scene,v=(y-3)/10,u=(x-2)/(this.width-4),left=f.backLeft+(f.frontLeft-f.backLeft)*v,wide=f.backWidth+(f.frontWidth-f.backWidth)*v;return{x:s.x+s.width*(left+wide*u),y:s.y+s.height*(f.back+(f.front-f.back)*v),size:this.scaleAt(y)}}
- inverse(px,py){const f=GRAPHICS.floor,s=this.scene,v=((py-s.y)/s.height-f.back)/(f.front-f.back),left=f.backLeft+(f.frontLeft-f.backLeft)*v,wide=f.backWidth+(f.frontWidth-f.backWidth)*v;return{x:2+((px-s.x)/s.width-left)/wide*(this.width-4),y:3+v*10}}
- scaleAt(y){const f=GRAPHICS.floor,v=(y-3)/10;return Math.max(.9,Math.min(1.12,(f.backWidth+(f.frontWidth-f.backWidth)*v)/.38))}
+ resize(width,floor){this.floor=floor?{...GRAPHICS.floor,...floor}:GRAPHICS.floor;this.width=width;const sceneWidth=1200*(width-4)/11;this.scene={x:width*20-sceneWidth/2,y:-350,width:sceneWidth,height:800}}
+ point(x,y){const f=this.floor||GRAPHICS.floor,s=this.scene,v=(y-3)/10,u=(x-2)/(this.width-4),left=f.backLeft+(f.frontLeft-f.backLeft)*v,wide=f.backWidth+(f.frontWidth-f.backWidth)*v;return{x:s.x+s.width*(left+wide*u),y:s.y+s.height*(f.back+(f.front-f.back)*v),size:this.scaleAt(y)}}
+ inverse(px,py){const f=this.floor||GRAPHICS.floor,s=this.scene,v=((py-s.y)/s.height-f.back)/(f.front-f.back),left=f.backLeft+(f.frontLeft-f.backLeft)*v,wide=f.backWidth+(f.frontWidth-f.backWidth)*v;return{x:2+((px-s.x)/s.width-left)/wide*(this.width-4),y:3+v*10}}
+ scaleAt(y){const f=this.floor||GRAPHICS.floor,v=(y-3)/10;return Math.max(.9,Math.min(1.12,(f.backWidth+(f.frontWidth-f.backWidth)*v)/.38))}
  footprint(x,y,w=2,h=1){return[[x,y],[x+w,y],[x+w,y+h],[x,y+h]].map(([a,b])=>this.point(a,b))}
 }
 export function waterfallState(time,reduced=false){if(reduced)return{flow:.8,top:0,bottom:1};const phase=((time%100)+100)%100,smooth=v=>{v=Math.max(0,Math.min(1,v));return v*v*(3-2*v)};return{flow:smooth(phase/6)*(1-smooth((phase-65)/10)),top:phase>=65?Math.min(1,(phase-65)/2):0,bottom:Math.min(1,phase/2)}}

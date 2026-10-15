@@ -1,10 +1,17 @@
 # Validation and playtest checklist
 
-## Release 1.9.2 validation
+## Release 2.1.0 validation
 
-57 Node checks pass: economy and persistence, routes and stock reservations, second checkout, supplier deliveries, research and automation, version-one save migration, directional sprite selection, bounded shared scale, reduced motion, contextual controls and offline asset coverage, continuous customer approach/departure and restoration of shoppers outside the store.
+New developer checks cover all six overrides without expansion changes, 90 complete fitting crops, progression/inventory/team/research controls, conditions, shopper spawn/clear, environment presets, time advance, reset cancellation and confirmed reset in an isolated save. All six location designs were visually inspected at 1400×1000.
 
-49 headless Chromium checks pass:
+New regression checks cover legacy delivery-overfill repair/refunds, upgrade reservations, full accessory-stock migration, support fitting inventory isolation, matching online fulfilment, recurring-story purchase requirements, six floor expansions, budget refusals, forecast persistence and distinct customer/staff atlas roles.
+
+Browser checks additionally render all six environments, verify Jewel-only water/transit, validate all 216 frame crops, check distance-driven walk/pause behaviour and fetch every new asset while offline.
+
+
+70 Node checks pass: economy and persistence, routes and stock reservations, second checkout, supplier deliveries, research and automation, version-one save migration, directional sprite selection, bounded shared scale, reduced motion, contextual controls and offline asset coverage, continuous customer approach/departure and restoration of shoppers outside the store.
+
+57 headless Chromium checks pass:
 
 - First sale, restock, upgrades, build confirmation, staff hire and online order through the UI.
 - Preview appears immediately; dragging snaps without committing; occupied tiles disable confirmation; cancelling a move preserves the original fixture.

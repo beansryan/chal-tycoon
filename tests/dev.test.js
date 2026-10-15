@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {DevTools} from '../src/dev.js';
+import {Engine} from '../src/engine.js';
+import {validateSave} from '../src/save.js';
+import {STORE_IDS,STORE_DESIGNS} from '../src/store-designs.js';
+import {FloorProjection} from '../src/graphics.js';
+const setup=()=>{const dev=Object.create(DevTools.prototype);dev.e=new Engine();dev.r={center(){},animationTime:0};dev.ui={speed:1};dev.refresh=()=>{};return dev};
+test('developer location override changes visuals without changing paid progress or layout',()=>{const dev=setup(),before=structuredClone(dev.e.s);for(const id of STORE_IDS){dev.setting('location',id);assert.equal(dev.e.location.id,id);assert.deepEqual(dev.e.s,before);assert.deepEqual(validateSave(dev.e.s).fixtures,before.fixtures)}dev.setting('location','');assert.equal(dev.e.location.id,'heartland');dev.setting('location','invalid');assert.equal(dev.e.location.id,'heartland')});
+test('developer stock fill cancels and refunds deliveries rather than overbooking a saved fixture',()=>{const d=setup();d.e.s.xp=3000;d.e.s.fixtures[0].stock=0;d.e.ops.order('display-1');const paid=d.e.s.deliveries[0].cost,cash=d.e.s.cash;d.action('stock','full');assert.equal(d.e.s.cash,cash+paid);assert.equal(d.e.s.deliveries.length,0);assert.equal(d.e.s.fixtures[0].stock,5);assert.doesNotThrow(()=>validateSave(d.e.s))});
+test('developer team, research and advance controls produce a valid save',()=>{const d=setup();d.action('team');d.action('research');assert.equal(d.e.s.staff.length,6);assert.equal(d.e.s.secondCheckout,true);d.e.open();d.action('advance','60');assert.ok(d.e.s.totalTime>=59.9);assert.equal(d.e.offlineMode,false);assert.doesNotThrow(()=>validateSave(d.e.s))});
+test('each store design keeps pointer inversion exact with its authored floor profile',()=>{for(const id of STORE_IDS){const p=new FloorProjection(15);p.resize(15,STORE_DESIGNS[id].floor);for(const [x,y] of [[2,3],[7,6],[12,10],[7,13.8]]){const screen=p.point(x,y),back=p.inverse(screen.x,screen.y);assert.ok(Math.abs(back.x-x)<1e-8&&Math.abs(back.y-y)<1e-8)}}});
