@@ -1,3 +1,5 @@
+> Historical UI notes from earlier builds. Current graphics research, scale rules and validation are in [GRAPHICS_REBUILD.md](GRAPHICS_REBUILD.md).
+
 # Visual direction · October 2026
 
 The latest user references set the art direction: detailed, warmly shaded pixel environments; consistent chibi characters; small readable game controls. The original artwork is created for this project. Reference images and commercial game art are not redistributed.
@@ -22,3 +24,7 @@ The user's latest Jewel sample guides the relationship between indoor garden, gl
 ## Layout editing reference
 
 [Supercell's Clash of Clans UI update](https://supercell.com/en/games/clashofclans/blog/news/weve-revamped-the-clash-of-clans-user-interface/) documents contextual Build/Edit Layout controls and a live world behind menus. The user specifically requested the Clash-style editing feel. Our implementation interprets that request as an immediate movable preview, snapped footprints, green/red placement status and explicit confirmation/cancellation. It retains the shop simulation's own footprint and customer-route rules; it does not copy Clash assets or claim to reproduce its exact editor.
+
+## Elevated view correction
+
+The user rejected the floor-level scenery, tiny gameplay scale and geometric ambient overlays. Release 1.5 uses a higher cutaway camera and an invertible floor trapezoid shared by drawing and controls. Counters sit behind a visible threshold. Detailed original train and water artwork replaces diagram-like shapes, and the walk atlas changes complete limb poses while holding a stable body scale.

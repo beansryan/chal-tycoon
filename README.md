@@ -2,17 +2,17 @@
 
 A playable, animated, offline-first PWA of a Singapore electronics shop in a Jewel-inspired mall. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
 
-## Release 1.4: connected mall and drag placement
+## Release 1.9.0: water, train occlusion and game-speed synchronization
 
-The shop, neighboring café and fashion store, indoor garden and promenade now form one connected scene that shares the same camera. Larger whole-body characters move smoothly between simulation steps. The actual Challenger logo fits the charcoal/cyan storefront. White store fixtures replace the orange cabinets; the HUD follows the same cool retail palette.
+The graphics now use a shared floor projection, explicit scenery layers, native pixel character poses, depth-based size rules and a flowing water material. Walking sprites are smaller, customer and employee artwork stay separate, and all views use one native pixel unit. Stable crown anchors remove frame-height bouncing; the side cycle excludes frames that lose the customer’s bag. The cashier stands further behind the counter with the upper body visible. The Challenger fascia is rebuilt against the upper glass corners, with the actual backlit logo; it no longer overhangs the neighbouring tenant panels. Gameplay and save format are unchanged.
 
-Two Skytrain services pass in opposite directions. The waterfall ramps on and off, with moving water and spray; its timing is a fictional ambient cycle. Pause freezes ambient motion and reduced motion removes train movement and water streak motion.
+- Characters use the exact supplied `character-atlas.png` artwork, with compatible directional walk poses. The renderer preserves each view’s scale and anchors frames by the head centre and foot baseline. Actual row separators prevent the old walk sheet from cutting off feet or including pixels from a neighbouring frame. Outfit palette changes preserve the head artwork.
+- Furniture width follows its actual two-cell footprint and keeps the image’s aspect ratio. Characters and fixtures share a bounded depth scale; near-camera growth is capped.
+- An analytical annular water curtain uses advected noise strands and an accelerated falling profile. It begins at the inner oculus lip, with an eased supply cycle and top-to-bottom draining. No waterfall PNG is loaded. The oculus rim, guideways and foreground garden cover it in the correct order. WebGL renders the material; Canvas 2D provides a fallback. Both train services, the water and corridor passers follow the selected 1×/2×/3× speed. Camera easing stays at normal speed.
+- Near and far trains use separate sizes, the complete three-car image keeps its proportions, and running wheels align to the guideway. Foreground foliage and bridge faces occlude passing trains.
+- Challenger’s charcoal fascia and cyan strip stop at its two tenant boundaries. The cafe and fashion shop have different fascias and their own signs.
 
-Choose a display to see its preview immediately. Drag the preview across the snapped grid, then confirm or cancel. Green/red footprints use the same occupancy and route checks as the simulation. Dragging empty floor pans, pinching zooms, and cancelling a move preserves the original display and inventory.
-
-Progression earns 4 XP per ordinary sale rather than 10. A fresh Mobile-only shop needs 60 ordinary sales to reach level 3. Restock costs now leave less surplus, so upgrades and hiring compete with working capital. Existing XP, layout, stock and cash are preserved.
-
-46 code checks and 35 headless Chromium browser checks pass. Physical-device and player testing remains outstanding.
+See `docs/GRAPHICS_REBUILD.md` for research sources, implementation decisions and validation limits. Phone and desktop rendering, visible train occlusion, texture motion, placement and offline loading are checked. Physical-device testing remains outstanding.
 
 ## Put it on GitHub Pages
 
@@ -38,7 +38,7 @@ Visit once online and let the game finish loading before relying on offline play
 
 ## Play
 
-1. Tap **Open the store**. The first customer buys a phone within about 25 seconds at normal speed.
+1. Tap **Open the store**. The first customer buys a phone within about 45 seconds at normal speed.
 2. Tap the phone display. **Restock** buys as many units as your cash allows; **Upgrade** increases capacity by three.
 3. Use **Goals** to collect completed shop milestones.
 4. At level 3, choose Computing or strengthen Mobile, and hire your first teammate.
@@ -53,7 +53,7 @@ Phones are portrait-first. Tablets and unfolded screens support both orientation
 
 ## What is included
 
-- Original detailed pixel mall panorama, transparent store shell, furniture and character atlases, created for this game.
+- Original detailed illustrated mall scene and transparent fixture atlas, created for this game; reference-style pixel characters.
 - Directional walk cycles, continuous corridor arrivals/departures, passing mall shoppers, browsing/reaching, cashier service, waterfall movement and delivery feedback.
 - Two checkouts with distinct queue slots and route/wait-aware lane choices.
 - Standard discounted deliveries, express deliveries and capacity reservations.
@@ -143,7 +143,7 @@ Upload the changed source and increment `VERSION` in `sw.js` for each published 
 
 ## Architecture and design
 
-`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns the pixel world and camera; `art.js` loads the mall and shop images and trims the furniture/character atlases; `characters.js` selects whole-body animation frames; `checkouts.js` routes queues; `operations.js` handles suppliers and research; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
+`src/config.js` holds economy and unlock tuning; `engine.js` contains simulation and route finding; `renderer.js` owns camera and gameplay drawing; `graphics.js` defines floor projection and shared scale; `scene.js` composites scene layers; `water.js` renders the flowing water material; `art.js` loads the mall and fixture images and trims the fixture atlas; `characters.js` selects and anchors native character poses; `checkouts.js` routes queues; `operations.js` handles suppliers and research; `input.js` classifies tap/pan/pinch; `ui.js` owns accessible DOM panels; `save.js` validates persistence; `audio.js` synthesises the score; `app.js` handles lifecycle, bridge and PWA registration.
 
 The game runs fixed 50ms simulation steps separately from rendering. NPCs recalculate paths after layout changes, not every frame. Saves happen on actions, periodic checkpoints and lifecycle changes.
 
