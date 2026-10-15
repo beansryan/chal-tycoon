@@ -1,4 +1,4 @@
-const VERSION='tycoon-v1.9.0';
+const VERSION='tycoon-v1.9.2';
 const CACHE=VERSION+'-'+self.registration.scope;
 const ASSETS=['./','./index.html','./style.css','./game-theme.css','./manifest.webmanifest','./src/app.js','./src/config.js','./src/engine.js','./src/checkouts.js','./src/operations.js','./src/save.js','./src/audio.js','./src/renderer.js','./src/graphics.js','./src/scene.js','./src/water.js','./src/art.js','./src/characters.js','./assets/fixtures-detailed.png','./assets/character-atlas.png','./assets/character-walk.png','./assets/challenger-logo.png','./assets/jewel-mall-tenants.png','./assets/skytrain-crystal.png','./src/input.js','./src/ui.js','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/apple-touch-icon.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));

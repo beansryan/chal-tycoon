@@ -2,9 +2,11 @@
 
 A playable, animated, offline-first PWA of a Singapore electronics shop in a Jewel-inspired mall. Start with one phone display, serve the neighbourhood, and decide how your shop grows. All money is **fictional Store Cash**. No account, payment, loyalty task or energy gate is needed.
 
-## Release 1.9.0: water, train occlusion and game-speed synchronization
+## Release 1.9.2: camera stays inside the mall
 
-The graphics now use a shared floor projection, explicit scenery layers, native pixel character poses, depth-based size rules and a flowing water material. Walking sprites are smaller, customer and employee artwork stay separate, and all views use one native pixel unit. Stable crown anchors remove frame-height bouncing; the side cycle excludes frames that lose the customer’s bag. The cashier stands further behind the counter with the upper body visible. The Challenger fascia is rebuilt against the upper glass corners, with the actual backlit logo; it no longer overhangs the neighbouring tenant panels. Gameplay and save format are unchanged.
+Pan, scroll and zoom stop at the illustrated environment edges. The minimum zoom fills both viewport dimensions, with bounds reapplied during smooth zooms, resizing and orientation changes.
+
+The graphics now use a shared floor projection, explicit scenery layers and solid foreground silhouettes, native pixel character poses, depth-based size rules and a flowing water material. Walking sprites are smaller, customer and employee artwork stay separate, and all views use one native pixel unit. Stable crown anchors remove frame-height bouncing; the side cycle excludes frames that lose the customer’s bag. The cashier stands further behind the counter with the upper body visible. The entire three-tenant beam now uses the front column boundaries. Challenger’s sign connects to two matching posts down to the floor; the adjacent wood and ivory signs fit the remaining spans. Gameplay and save format are unchanged.
 
 - Characters use the exact supplied `character-atlas.png` artwork, with compatible directional walk poses. The renderer preserves each view’s scale and anchors frames by the head centre and foot baseline. Actual row separators prevent the old walk sheet from cutting off feet or including pixels from a neighbouring frame. Outfit palette changes preserve the head artwork.
 - Furniture width follows its actual two-cell footprint and keeps the image’s aspect ratio. Characters and fixtures share a bounded depth scale; near-camera growth is capped.

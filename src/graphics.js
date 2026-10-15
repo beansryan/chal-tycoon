@@ -1,21 +1,21 @@
 // One authored coordinate system for scenery, world objects and pointer picking.
+const sourcePath=points=>points.map(([x,y])=>[x/1536,y/1024]);
 export const GRAPHICS={
  personHeight:48,
  floor:{back:.560,front:.768,backLeft:.335,frontLeft:.285,backWidth:.330,frontWidth:.430},
  water:{center:.500,top:.051,bottom:.386,width:.132},
- sign:{left:481/1536,right:1056/1536,top:393/1024,bottom:449/1024},
+ sign:{left:416/1536,right:1120/1536,top:393/1024,bottom:449/1024,postWidth:19/1536,postBottom:785/1024,cafeLeft:0,fashionRight:1456/1536},
  rails:[{id:'far',y:.187,deckBottom:.235,height:.031,speed:31,offset:0},{id:'near',y:.313,deckBottom:.358,height:.039,speed:37,offset:48}],
- // Native art contours in normalized source coordinates. These are occluders,
- // not bounds of the train: a train continues moving while it is hidden.
+ // Solid foreground masses traced from the source. Interior flowers, stone,
+ // shadow and bark are all opaque. Background palms are NOT foreground masks:
+ // the open near guideway runs in front of them.
  foliage:[
-  [[0,.10],[.185,.10],[.185,.137],[.202,.142],[.209,.158],[.225,.168],[.222,.186],[.205,.193],[0,.193]],
-  [[.79,.08],[1,.08],[1,.193],[.817,.193],[.811,.178],[.777,.176],[.762,.164],[.749,.162],[.766,.150],[.784,.146]],
-  [[0,.263],[.057,.263],[.067,.280],[.076,.292],[.079,.316],[0,.316]],
-  [[.908,.26],[1,.26],[1,.361],[.919,.361],[.907,.342],[.897,.323],[.905,.303]],
-  [[.794,.105],[.807,.105],[.825,.317],[.811,.317]],
-  [[.145,.105],[.159,.105],[.176,.317],[.162,.317]],
-  // Splash landing is inside the garden and behind the retail parapet.
-  [[0,.379],[1,.379],[1,.390],[0,.390]]
+  sourcePath([[0,0],[292,0],[292,130],[303,138],[299,145],[313,147],[313,155],[326,155],[323,166],[335,173],[330,180],[340,185],[330,194],[318,202],[0,202]]),
+  sourcePath([[1188,0],[1536,0],[1536,204],[1193,204],[1198,194],[1207,183],[1204,170],[1201,150],[1196,128],[1192,108]]),
+  sourcePath([[0,236],[91,236],[97,253],[98,269],[108,276],[110,287],[120,291],[115,303],[123,310],[120,322],[130,330],[127,344],[140,362],[0,362]]),
+  sourcePath([[1536,205],[1418,205],[1398,220],[1402,232],[1387,242],[1377,258],[1388,267],[1382,279],[1394,289],[1389,298],[1404,309],[1400,322],[1410,334],[1403,349],[1411,370],[1536,370]]),
+  // The splash landing remains behind the retail parapet.
+  sourcePath([[0,388],[1536,388],[1536,400],[0,400]])
  ]
 };
 export class FloorProjection{

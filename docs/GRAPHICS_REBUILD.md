@@ -27,7 +27,7 @@ The engine remains dependency-free. The research is applied in the Canvas render
 
 ## Verification
 
-56 code checks and 47 headless Chromium integration checks pass. The graphics checks inspect rendered pixels: a train changes pixels in an open guideway span but leaves foreground foliage pixels unchanged; water pixels vary over time with a fixed attachment. The integration suite also checks sprite loading, complete walk frames, fixture proportions, placement gestures, save compatibility and offline loading under a repository subpath.
+56 code checks and 48 headless Chromium integration checks pass. The graphics checks inspect rendered pixels: a train changes pixels in an open guideway span but leaves foreground foliage pixels unchanged; water pixels vary over time with a fixed attachment. The integration suite also checks sprite loading, complete walk frames, fixture proportions, placement gestures, save compatibility and offline loading under a repository subpath.
 
 Phone and desktop compositions are visually inspected. These checks do not establish subjective art quality or replace physical iPhone/Android testing. No real-device frame-rate guarantee is claimed.
 
@@ -44,3 +44,11 @@ The cashier shares the same character unit as customers and stands 1.9 logical r
 - Added regressions for contour gaps on both sides, adjacent-tenant pixels, 1×/2×/3× train displacement and water uniforms, the actual fast-forward button, and shader/Canvas water aperture, movement and drainage.
 
 Water reference: [Changi Airport: behind the Rain Vortex](https://www.changiairport.com/en/corporate/our-media-hub/publications/changi-journeys/2020/what-goes-on-behind-the-worlds-tallest-indoor-waterfall.html), describing the even circular flow supplied by the oculus. The visual is a stylized game interpretation, not a fluid simulation.
+
+## 1.9.1: source-geometry correction
+
+The original sign dividers were at x481 and x1056, while the front wall columns were at x416–435 and x1101–1120. The whole beam is now rebuilt at x416–1120, with matching posts to y785 and resized adjoining tenant panels. The main sign is no longer treated as an isolated rectangle.
+
+The colour-key foreground mask allowed train windows to show through grey stone and dark gaps inside dense foreground plants. It also classified background palm stems as foreground despite the near guideway passing in front of them. Solid traced garden masses replace that classifier. Tests now cover grey stone at all four train entries and the open near span; the earlier trunk-occlusion expectation was incorrect and has been replaced.
+
+Four entry/exit frames and the connected frontage are visually inspected at native source resolution. The source crops in the new feedback are used as counterexamples, not just green foliage sample points.

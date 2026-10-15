@@ -23,7 +23,7 @@ Research into cognitive load, flow, telemetry-assisted balancing and multi-week 
 
 The renderer is split into shared geometry (`graphics.js`), scenery compositing (`scene.js`), water material (`water.js`), native sprite playback (`characters.js`) and gameplay drawing/camera (`renderer.js`). All projected footprints, sizes and pointer inverses come from one floor projection.
 
-The scene uses `jewel-mall-tenants.png`. Challenger’s fascia occupies source x481–1055 and y393–447; adjacent tenants use separate wood/ivory panels. Its playable floor retains the calibrated back and threshold edges. The actual logo is drawn separately inside the central fascia.
+The scene uses `jewel-mall-tenants.png`. The original painted fascia occupied x481–1055, although the front structural columns are at x416–435 and x1101–1120. The rebuilt central beam spans x416–1120, y393–449, with 19px posts down to y785. The adjacent wood/ivory panels fit the remaining widths. Its playable floor retains the calibrated back and threshold edges. The actual logo is drawn separately inside the central fascia.
 
 `character-atlas.png` is byte-for-byte the supplied style reference. `character-walk.png` provides side/back poses. Its true row separators are 0/236/449/672/887; equal quarters cut through some feet. Frames share a scale within each actor/view and use head-centred horizontal registration with sole-based vertical pivots. Motion advances with travel distance and holds while paused. The customer back cycle skips two inconsistent tote poses. Palette variants are cached per cropped frame and affect torso clothing only. Browsing characters do not turn front-facing just to gesture.
 
@@ -35,4 +35,4 @@ The water is generated analytically in `water.js`: an elliptical inner-lip attac
 
 Detailed research and pixel verification are recorded in `GRAPHICS_REBUILD.md`.
 
-The foliage layer is a transparent contour mask. Inside the authored foreground regions, plant and bark colour coverage removes background gaps; narrow sloping palm cores remain solid. Train carriages pass behind the actual foreground contours rather than rectangular background patches. Train artwork is cropped to its measured complete alpha bounds. The sign is a charcoal ribbed fascia with independent native glass-corner anchors, cyan edge lighting and the supplied logo, rather than a horizontally stretched photograph of a sign.
+The foliage layer contains solid, traced foreground garden silhouettes. Stone, flowers, bark and shadows are equally opaque inside these masses. No RGB classification cuts holes through the garden walls. The near guideway runs in front of background palms, so those trunks do not slice passing carriages. Train artwork is cropped to its measured complete alpha bounds. The shared storefront beam and posts use the same source anchors, with a charcoal ribbed central fascia, cyan edge lighting and the supplied logo. The two posts enclose the playable floor threshold.

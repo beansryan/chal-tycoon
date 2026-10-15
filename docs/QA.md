@@ -1,10 +1,10 @@
 # Validation and playtest checklist
 
-## Release 1.9.0 validation
+## Release 1.9.2 validation
 
-56 Node checks pass: economy and persistence, routes and stock reservations, second checkout, supplier deliveries, research and automation, version-one save migration, directional sprite selection, bounded shared scale, reduced motion, contextual controls and offline asset coverage, continuous customer approach/departure and restoration of shoppers outside the store.
+57 Node checks pass: economy and persistence, routes and stock reservations, second checkout, supplier deliveries, research and automation, version-one save migration, directional sprite selection, bounded shared scale, reduced motion, contextual controls and offline asset coverage, continuous customer approach/departure and restoration of shoppers outside the store.
 
-47 headless Chromium checks pass:
+49 headless Chromium checks pass:
 
 - First sale, restock, upgrades, build confirmation, staff hire and online order through the UI.
 - Preview appears immediately; dragging snaps without committing; occupied tiles disable confirmation; cancelling a move preserves the original fixture.
@@ -12,14 +12,15 @@
 - Customers approach from beyond the visible frame, cross the doorway continuously and remain visible in the corridor until leaving the frame.
 - Second checkout, supplier order/arrival and research controls.
 - Ten viewport sizes: 320×568, 390×844, 430×932, 768×1024, 820×1180, 1024×1366, 1024×768, 1366×1024, 844×390 and 700×600.
+- Camera coverage across pan extremes, zoom transitions, orientation changes and store expansions; wheel and keyboard coverage at all ten viewport sizes.
 - Book and tabletop hinge layouts keep world and management panes separate.
 - Cashier render anchors stay behind the shop threshold; camera changes do not teleport corridor passers.
 - Perspective and pointer inverse agree across the floor, corridor and all expansions.
 - Attached sprite art and complete walk frames load; correct row separators prevent foot clipping. Customer role selection is checked at the renderer level for every archetype; stationary actors do not walk in place; turns complete their current interpolation before following the next waypoint. Native crowns use the same reference unit, and inconsistent tote frames are excluded.
 - Train pixels change in the open span while a foreground foliage patch stays unchanged.
 - Water pixels change while the fall remains attached; furniture keeps its native aspect ratio.
-- Both train edge masks contain opaque foliage and transparent leaf gaps.
-- The fascia leaves neighbouring tenant pixels intact.
+- Solid garden stone samples at all four entries remain unchanged while trains pass behind them. Background palms no longer cut windows out of the open near guideway.
+- The three tenant panels retain their respective finishes. Both new front posts are continuous from the sign beam to the floor, and their inner edges enclose the playable threshold across expansions.
 - Train displacement and water material time follow 1×/2×/3×; the actual speed button produces approximately 3× environmental time.
 - WebGL and Canvas fallback water keep the oculus clear, animate, and drain from the top.
 - Closing report continuation; no uncaught browser errors.
